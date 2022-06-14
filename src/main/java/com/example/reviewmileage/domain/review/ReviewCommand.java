@@ -19,10 +19,12 @@ public class ReviewCommand {
         private User user;
         private Place place;
         private String content;
+        private String reviewToekn;
         private List<Photo> photoList;
 
         public Review toEntity() {
             return Review.builder()
+                    .reviewToken(reviewToekn)
                     .place(place)
                     .user(user)
                     .content(content)

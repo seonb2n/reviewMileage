@@ -52,13 +52,13 @@ public class Review extends BaseEntity {
     private int mileagePoint;
 
     @Builder
-    public Review(User user, Place place, String content, List<Photo> photos) {
+    public Review(User user, Place place, String reviewToken, String content, List<Photo> photos) {
         this.user = user;
         this.place = place;
         isFirstReview = place.getReviewList().size() == 0;
         this.content = content;
         photoList.addAll(photos);
-        this.reviewToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_REVIEW);
+        this.reviewToken = reviewToken;
         calculatePoint();
     }
 
