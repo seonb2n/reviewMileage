@@ -32,7 +32,7 @@ public class Review extends BaseEntity {
 
     private String reviewToken;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "review")
     @JsonManagedReference
     private List<Photo> photoList = new ArrayList<>();
 
@@ -48,28 +48,36 @@ public class Review extends BaseEntity {
 
     private String content;
 
+    private boolean isFirstReview;
     private int mileagePoint;
 
     @Builder
-    public Review(User user, Place place, String content, Photo... photos) {
+    public Review(User user, Place place, String content, List<Photo> photos) {
         this.user = user;
         this.place = place;
+        isFirstReview = place.getReviewList().size() == 0;
         this.content = content;
-        photoList.addAll(List.of(photos));
+        photoList.addAll(photos);
         this.reviewToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_REVIEW);
-        mileagePoint = 0;
         calculatePoint();
     }
 
     public void calculatePoint() {
+        mileagePoint = 0;
         if (content.length() >= 1) {
             mileagePoint++;
         }
-        if (place.getReviewList().size() == 1) {
+        if (isFirstReview) {
             mileagePoint++;
         }
         if(photoList.size() >= 1) {
             mileagePoint++;
         }
+    }
+
+    public void updateReview(ReviewCommand.ReviewUpdateCommand reviewUpdateCommand) {
+        this.content = reviewUpdateCommand.getContent();
+        this.photoList = reviewUpdateCommand.getPhotoList();
+        calculatePoint();
     }
 }

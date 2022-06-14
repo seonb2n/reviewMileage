@@ -32,11 +32,11 @@ public class Place extends BaseEntity {
     @JsonManagedReference
     private List<Review> reviewList = new ArrayList<>();
 
-    private String name;
+    private String placeName;
 
     @Builder
-    private Place(String name) {
-        this.name = name;
+    private Place(String placeName) {
+        this.placeName = placeName;
         placeToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PLACE);
     }
 

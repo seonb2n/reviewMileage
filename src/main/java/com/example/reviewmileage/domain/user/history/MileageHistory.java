@@ -31,16 +31,13 @@ public class MileageHistory extends BaseEntity {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToOne
-    private Review review;
 
     private int mileagePoint;
 
     @Builder
-    public MileageHistory(User user, Review review) {
+    public MileageHistory(User user) {
         this.user = user;
-        this.review = review;
         historyToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_HISTORY);
-        this.mileagePoint = review.getMileagePoint();
+        this.mileagePoint = user.getUserMileagePoint();
     }
 }
