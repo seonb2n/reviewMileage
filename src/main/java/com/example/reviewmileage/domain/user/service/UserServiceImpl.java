@@ -26,4 +26,9 @@ public class UserServiceImpl implements UserService{
        User user = userReader.getUserWithUserToken(userToken);
        return new UserInfo.Main(user);
     }
+
+    @Override
+    public User findUserWithUserToken(String userToken) {
+        return userReader.getUserWithUserToken(userToken);
+    }
 }

@@ -20,4 +20,11 @@ public class PlaceCommand {
         }
     }
 
+    @Builder
+    @Getter
+    @ToString
+    public static class PlaceFindCommand {
+        private String placeToken;
+    }
+
 }

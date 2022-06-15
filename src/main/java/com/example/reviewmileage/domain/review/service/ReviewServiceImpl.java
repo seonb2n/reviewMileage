@@ -31,4 +31,9 @@ public class ReviewServiceImpl implements ReviewService{
     public void deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand) {
         reviewStore.delete(reviewDeleteCommand.getReviewToken());
     }
+
+    @Override
+    public Review findReviewWithReviewToken(String reviewToken) {
+        return reviewReader.getReviewWithReviewToken(reviewToken);
+    }
 }

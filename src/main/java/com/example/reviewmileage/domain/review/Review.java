@@ -32,7 +32,7 @@ public class Review extends BaseEntity {
 
     private String reviewToken;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "review")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
     @JsonManagedReference
     private List<Photo> photoList = new ArrayList<>();
 

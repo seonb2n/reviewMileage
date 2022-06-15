@@ -34,8 +34,8 @@ public class Photo extends BaseEntity {
     private Review review;
 
     @Builder
-    public Photo(String data) {
+    public Photo(String data, String photoToken) {
         this.data = data;
-        photoToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PHOTO);
+        this.photoToken = photoToken;
     }
 }

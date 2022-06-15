@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class UserFacadeTest {
 
@@ -25,7 +23,7 @@ class UserFacadeTest {
 
         var user = userFacade.registerUser(userRegisterCommand);
 
-        var foundUser = userFacade.findUserWithUserToken(
+        var foundUser = userFacade.getUserInfoWithUserFindCommand(
                 UserCommand.UserFindCommand.builder()
                         .userToken(user.getUserToken())
                         .build());

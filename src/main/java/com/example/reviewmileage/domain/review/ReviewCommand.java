@@ -3,7 +3,6 @@ package com.example.reviewmileage.domain.review;
 import com.example.reviewmileage.domain.place.Place;
 import com.example.reviewmileage.domain.review.photos.Photo;
 import com.example.reviewmileage.domain.user.User;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -19,12 +18,12 @@ public class ReviewCommand {
         private User user;
         private Place place;
         private String content;
-        private String reviewToekn;
+        private String reviewToken;
         private List<Photo> photoList;
 
         public Review toEntity() {
             return Review.builder()
-                    .reviewToken(reviewToekn)
+                    .reviewToken(reviewToken)
                     .place(place)
                     .user(user)
                     .content(content)

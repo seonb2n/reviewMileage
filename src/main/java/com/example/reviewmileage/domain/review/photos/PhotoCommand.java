@@ -12,10 +12,12 @@ public class PhotoCommand {
     @ToString
     public static class PhotoRegisterCommand {
         private String data;
+        private String photoToken;
 
         public Photo toEntity() {
             return Photo.builder()
                     .data(data)
+                    .photoToken(photoToken)
                     .build();
         }
     }
