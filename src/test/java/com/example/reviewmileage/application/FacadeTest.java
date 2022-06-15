@@ -81,6 +81,7 @@ public class FacadeTest {
                 .build());
     }
 
+    //1. 리뷰 등록 및 마일리지 반영 테스트
     @Test
     public void addReviewTest() {
 
@@ -100,5 +101,33 @@ public class FacadeTest {
         Assertions.assertEquals(3, review.getMileagePoint());
         User updateUser = userFacade.findUserWithUserToken(user.getUserToken());
         Assertions.assertEquals(3, updateUser.getUserMileagePoint());
+    }
+
+    //1.1 두 번째 리뷰 추가시 해당 사용자의 마일리지 테스트
+    @Test
+    public void addNewReviewTest() {
+        var user2 = userFacade.registerUser(UserCommand.UserRegisterCommand.builder()
+                .userName("test-user2")
+                .build());
+
+        var reviewRegisterCommand = ReviewCommand.ReviewRegisterCommand.builder()
+                .user(userFacade.findUserWithUserToken(user2.getUserToken()))
+                .place(placeFacade.findPlaceWithPlaceToken(place.getPlaceToken()))
+                .reviewToken(reviewToken+"2")
+                .photoList(new ArrayList<>())
+                .content("good").build();
+
+        var review = reviewFacade.registerReview(reviewRegisterCommand);
+        log.info(String.valueOf(review.getMileagePoint()));
+
+        var foundUser = userFacade.findUserWithUserToken(user2.getUserToken());
+        Assertions.assertEquals(1, foundUser.getUserMileagePoint());
+    }
+
+    //2. 기존의 리뷰 변경 시 마일리지 수정 및 마일리지 변경 히스토리 테스트
+    @Test
+    public void modReviewTest() {
+        User targetUser = userFacade.findUserWithUserToken(user.getUserToken());
+        
     }
 }
