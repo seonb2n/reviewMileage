@@ -35,7 +35,7 @@ public class ReviewCommand {
     @Getter
     @Builder
     @ToString
-    public static class ReviewUpdateCommand {
+    public static class ReviewModCommand {
         private String reviewToken;
         private String content;
         private List<Photo> photoList;

@@ -1,6 +1,5 @@
 package com.example.reviewmileage.domain.review;
 
-import com.example.reviewmileage.common.util.TokenGenerator;
 import com.example.reviewmileage.domain.BaseEntity;
 import com.example.reviewmileage.domain.place.Place;
 import com.example.reviewmileage.domain.review.photos.Photo;
@@ -75,7 +74,7 @@ public class Review extends BaseEntity {
         }
     }
 
-    public void updateReview(ReviewCommand.ReviewUpdateCommand reviewUpdateCommand) {
+    public void updateReview(ReviewCommand.ReviewModCommand reviewUpdateCommand) {
         this.content = reviewUpdateCommand.getContent();
         this.photoList = reviewUpdateCommand.getPhotoList();
         calculatePoint();

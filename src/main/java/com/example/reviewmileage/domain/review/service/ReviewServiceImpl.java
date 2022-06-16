@@ -25,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public ReviewInfo.Main modReview(ReviewCommand.ReviewUpdateCommand reviewUpdateCommand) {
+    public ReviewInfo.Main modReview(ReviewCommand.ReviewModCommand reviewUpdateCommand) {
         Review review = reviewReader.getReviewWithReviewToken(reviewUpdateCommand.getReviewToken());
         review.updateReview(reviewUpdateCommand);
         return new ReviewInfo.Main(reviewStore.store(review));

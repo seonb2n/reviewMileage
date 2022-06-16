@@ -3,7 +3,12 @@ package com.example.reviewmileage.interfaces;
 import com.example.reviewmileage.application.place.PlaceFacade;
 import com.example.reviewmileage.application.review.ReviewFacade;
 import com.example.reviewmileage.application.user.UserFacade;
+import com.example.reviewmileage.common.response.response.CommonResponse;
+import com.example.reviewmileage.interfaces.dto.EventDto;
+import com.example.reviewmileage.interfaces.dto.EventDtoMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +18,41 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReviewApiController {
 
     private final ReviewFacade reviewFacade;
-    private final UserFacade userFacade;
-    private final PlaceFacade placeFacade;
+    private final EventDtoMapper eventDtoMapper;
 
+    @PostMapping("/events")
+    public CommonResponse handleEvents(@RequestBody EventDto.EventRequest eventRequest) {
+        CommonResponse result = null;
+        switch (eventRequest.getAction()) {
+            case ("ADD") : result = registerEvent(eventRequest);
+            break;
+            case ("MOD") : result = modEvent(eventRequest);
+            break;
+            case ("DELETE") : result = deleteEvent(eventRequest);
+            break;
+        }
+        if(result == null) {
+            return CommonResponse.fail("내부 로직 오류");
+        }
+        return result;
+    }
+
+    public CommonResponse registerEvent(EventDto.EventRequest eventRequest) {
+        var command = eventDtoMapper.toReviewRegisterCommand(eventRequest);
+        var review = reviewFacade.registerReview(command);
+        return CommonResponse.success(review);
+    }
+
+    public CommonResponse modEvent(EventDto.EventRequest eventRequest) {
+        var command = eventDtoMapper.toReviewModCommand(eventRequest);
+        var review = reviewFacade.modReview(command);
+        return CommonResponse.success(review);
+    }
+
+    public CommonResponse deleteEvent(EventDto.EventRequest eventRequest) {
+        var command = eventDtoMapper.toReviewDeleteCommand(eventRequest);
+        reviewFacade.deleteReview(command);
+        return CommonResponse.success("삭제가 완료됐습니다.");
+    }
 
 }

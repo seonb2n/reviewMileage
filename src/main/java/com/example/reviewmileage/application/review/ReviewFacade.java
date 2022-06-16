@@ -2,15 +2,12 @@ package com.example.reviewmileage.application.review;
 
 import com.example.reviewmileage.application.place.PlaceFacade;
 import com.example.reviewmileage.application.user.UserFacade;
-import com.example.reviewmileage.domain.review.Review;
 import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.ReviewInfo;
 import com.example.reviewmileage.domain.review.photos.PhotoService;
 import com.example.reviewmileage.domain.review.service.ReviewService;
-import com.example.reviewmileage.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +25,7 @@ public class ReviewFacade {
         return review;
     }
 
-    public ReviewInfo.Main modReview(ReviewCommand.ReviewUpdateCommand reviewUpdateCommand) {
+    public ReviewInfo.Main modReview(ReviewCommand.ReviewModCommand reviewUpdateCommand) {
         var review = reviewService.modReview(reviewUpdateCommand);
         var user = userFacade.findUserWithUserToken(review.getUser().getUserToken());
         userFacade.updateUser(user);

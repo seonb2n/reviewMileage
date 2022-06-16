@@ -5,7 +5,6 @@ import com.example.reviewmileage.application.review.ReviewFacade;
 import com.example.reviewmileage.application.user.UserFacade;
 import com.example.reviewmileage.domain.place.PlaceCommand;
 import com.example.reviewmileage.domain.place.PlaceInfo;
-import com.example.reviewmileage.domain.review.Review;
 import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.photos.PhotoCommand;
 import com.example.reviewmileage.domain.review.photos.PhotoInfo;
@@ -128,7 +127,7 @@ public class FacadeTest {
     //2. 기존의 리뷰 변경 시 마일리지 수정 및 마일리지 변경 히스토리 테스트
     @Test
     public void modReviewTest() {
-        var reviewUpdateCommand = ReviewCommand.ReviewUpdateCommand.builder()
+        var reviewUpdateCommand = ReviewCommand.ReviewModCommand.builder()
                 .reviewToken(reviewToken)
                 .content("mod-content")
                 .photoList(new ArrayList<>())

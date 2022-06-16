@@ -8,7 +8,7 @@ public interface ReviewService {
 
     ReviewInfo.Main addReview(ReviewCommand.ReviewRegisterCommand reviewRegisterCommand);
 
-    ReviewInfo.Main modReview(ReviewCommand.ReviewUpdateCommand reviewUpdateCommand);
+    ReviewInfo.Main modReview(ReviewCommand.ReviewModCommand reviewUpdateCommand);
 
     void deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand);
 
