@@ -3,15 +3,19 @@ package com.example.reviewmileage.domain.review.service;
 import com.example.reviewmileage.domain.review.Review;
 import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.ReviewInfo;
+import com.example.reviewmileage.domain.review.photos.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReviewServiceImpl implements ReviewService{
 
     private final ReviewReader reviewReader;
     private final ReviewStore reviewStore;
+    private final PhotoService photoService;
 
     @Override
     public ReviewInfo.Main addReview(ReviewCommand.ReviewRegisterCommand reviewRegisterCommand) {
@@ -33,6 +37,7 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Review findReviewWithReviewToken(String reviewToken) {
         return reviewReader.getReviewWithReviewToken(reviewToken);
     }

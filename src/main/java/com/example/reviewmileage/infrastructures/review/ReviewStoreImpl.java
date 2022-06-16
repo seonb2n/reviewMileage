@@ -23,6 +23,6 @@ public class ReviewStoreImpl implements ReviewStore {
 
     @Override
     public void delete(String reviewToken) {
-        reviewRepository.deleteByReviewToken(reviewToken);
+        reviewRepository.deleteReviewByReviewToken(reviewToken);
     }
 }

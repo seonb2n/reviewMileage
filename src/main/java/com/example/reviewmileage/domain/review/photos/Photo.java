@@ -18,6 +18,7 @@ import javax.persistence.*;
 @Table(name="Photo")
 public class Photo extends BaseEntity {
 
+
     private static final String PREFIX_PHOTO = "photo_";
 
     @Id

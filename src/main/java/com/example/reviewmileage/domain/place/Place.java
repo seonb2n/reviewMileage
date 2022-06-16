@@ -28,7 +28,7 @@ public class Place extends BaseEntity {
 
     private String placeToken;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "place")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "place")
     @JsonManagedReference
     private List<Review> reviewList = new ArrayList<>();
 

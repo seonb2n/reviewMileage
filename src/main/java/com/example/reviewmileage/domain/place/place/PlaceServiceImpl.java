@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PlaceServiceImpl implements PlaceService{
 
     private final PlaceRepository placeRepository;
 
     @Override
-    @Transactional
     public PlaceInfo.Main registerPlace(PlaceCommand.PlaceRegisterCommand placeRegisterCommand) {
         Place initPlace = placeRegisterCommand.toEntity();
         Place place = placeRepository.save(initPlace);
@@ -24,6 +24,7 @@ public class PlaceServiceImpl implements PlaceService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PlaceInfo.Main getPlaceWithPlaceToken(String placeToken) {
         Place place = placeRepository.findPlaceByPlaceToken(placeToken).orElseThrow(TokenNotFoundException::new);
         return new PlaceInfo.Main(place);

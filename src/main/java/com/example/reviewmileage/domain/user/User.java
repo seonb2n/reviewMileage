@@ -33,7 +33,7 @@ public class User extends BaseEntity {
 
     private int userMileagePoint;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
     private List<Review> reviewList = new ArrayList<>();
 
@@ -46,6 +46,10 @@ public class User extends BaseEntity {
         this.userName = userName;
         userToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_USER);
         userMileagePoint = 0;
+    }
+
+    public void deleteReview(Review review) {
+        this.reviewList.remove(review);
     }
 
     public int updateMileage() {

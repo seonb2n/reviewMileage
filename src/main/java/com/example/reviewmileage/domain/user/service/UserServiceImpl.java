@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService{
 
     private final UserStore userStore;
@@ -22,13 +23,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserInfo.Main getUserWithUserToken(String userToken) {
        User user = userReader.getUserWithUserToken(userToken);
        return new UserInfo.Main(user);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserWithUserToken(String userToken) {
         return userReader.getUserWithUserToken(userToken);
+    }
+
+    @Override
+    public UserInfo.Main updateUser(User user) {
+        User savedUser = userStore.store(user);
+        return new UserInfo.Main(savedUser);
     }
 }

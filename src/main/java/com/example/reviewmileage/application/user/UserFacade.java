@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserFacade {
 
     private final UserService userService;
-    private final UserStore userStore;
     private final MileageHistoryService mileageHistoryService;
 
     public UserInfo.Main registerUser(UserCommand.UserRegisterCommand userRegisterCommand) {
@@ -32,14 +31,12 @@ public class UserFacade {
         return userService.findUserWithUserToken(userToken);
     }
 
-    @Transactional
-    public void updateUser(Review review) {
-        User user = review.getUser();
+    public void updateUser(User user) {
         int nowMileage = user.getUserMileagePoint();
         int newMileage = user.updateMileage();
         if(nowMileage != newMileage) {
             mileageHistoryService.registerMileageHistory(user);
         }
-        userStore.store(user);
+        userService.updateUser(user);
     }
 }
