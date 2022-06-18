@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name="user")
+@Table(name="user", indexes = {@Index(name = "user_token_index", columnList = "user_token")})
 public class User extends BaseEntity {
 
     private static final String PREFIX_USER = "user_";
@@ -27,13 +27,14 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(name = "user_token")
     private String userToken;
 
     private String userName;
 
     private int userMileagePoint;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
     @JsonManagedReference
     private List<Review> reviewList = new ArrayList<>();
 
@@ -50,6 +51,10 @@ public class User extends BaseEntity {
 
     public void deleteReview(Review review) {
         this.reviewList.remove(review);
+    }
+
+    public void addReview(Review review) {
+        this.reviewList.add(review);
     }
 
     public int updateMileage() {

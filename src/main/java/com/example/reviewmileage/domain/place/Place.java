@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name="Place")
+@Table(name="Place", indexes = {@Index(name = "place_token_index", columnList = "place_token")})
 public class Place extends BaseEntity {
 
     private static final String PREFIX_PLACE = "place_";
@@ -26,6 +26,7 @@ public class Place extends BaseEntity {
     @GeneratedValue
     private Long placeId;
 
+    @Column(name = "place_token")
     private String placeToken;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "place")
@@ -41,7 +42,7 @@ public class Place extends BaseEntity {
     }
 
     public String updatePlaceToken(String newPlaceToken) {
-        this.placeName = newPlaceToken;
+        this.placeToken = newPlaceToken;
         return newPlaceToken;
     }
 }

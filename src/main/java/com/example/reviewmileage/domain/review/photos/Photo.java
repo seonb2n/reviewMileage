@@ -15,7 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name="Photo")
+@Table(name="Photo", indexes = {@Index(name = "photo_token_index", columnList = "photo_token")})
 public class Photo extends BaseEntity {
 
 
@@ -25,6 +25,7 @@ public class Photo extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long photoId;
 
+    @Column(name = "photo_token")
     private String photoToken;
 
     private String data;

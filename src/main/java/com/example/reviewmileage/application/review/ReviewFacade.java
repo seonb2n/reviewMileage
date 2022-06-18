@@ -19,10 +19,11 @@ public class ReviewFacade {
     private final PhotoService photoService;
 
     public ReviewInfo.Main registerReview(ReviewCommand.ReviewRegisterCommand reviewRegisterCommand) {
-        var review = reviewService.addReview(reviewRegisterCommand);
-        var user = userFacade.findUserWithUserToken(review.getUser().getUserToken());
+        var reviewInfo = reviewService.addReview(reviewRegisterCommand);
+        var user = reviewRegisterCommand.getUser();
+        user.addReview(reviewService.findReviewWithReviewToken(reviewInfo.getReviewToken()));
         userFacade.updateUser(user);
-        return review;
+        return reviewInfo;
     }
 
     public ReviewInfo.Main modReview(ReviewCommand.ReviewModCommand reviewUpdateCommand) {

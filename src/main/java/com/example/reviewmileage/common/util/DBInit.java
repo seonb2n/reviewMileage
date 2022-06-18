@@ -39,11 +39,11 @@ public class DBInit implements CommandLineRunner {
     private static PhotoInfo.Main photo1;
     private static PhotoInfo.Main photo2;
 
-    private static final String userToken = "user_e0ef2-92b7-4817-a5f3-0c575361f745";
-    private static final String placeToken = "place_f1c-5acb-4efb-a1af-eddada31b00f";
-    private static final String reviewToken = "review_58-dc5f-4878-9381-ebb7b2667772";
-    private static final String photoToken1 = "photo_4e-a531-46de-88d0-ff0ed70c0bb82";
-    private static final String photoToken2 = "photo_e2-851d-4a50-bb07-9cc15cbdc332";
+    private static final String userToken = "user_e0ef2-92b7-4817-a5f3-0c575361f7451";
+    private static final String placeToken = "place_f1c-5acb-4efb-a1af-eddada31b00f1";
+    private static final String reviewToken = "review_58-dc5f-4878-9381-ebb7b26677721";
+    private static final String photoToken1 = "photo_4e-a531-46de-88d0-ff0ed70c0bb821";
+    private static final String photoToken2 = "photo_e2-851d-4a50-bb07-9cc15cbdc3321";
 
     @Override
     @Transactional

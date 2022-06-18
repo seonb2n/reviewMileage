@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name="Review")
+@Table(name="Review", indexes = {@Index(name="review_token_index", columnList = "review_token")})
 public class Review extends BaseEntity {
 
     private static final String PREFIX_REVIEW = "review_";
@@ -29,6 +29,7 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
+    @Column(name = "review_token")
     private String reviewToken;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "review")
