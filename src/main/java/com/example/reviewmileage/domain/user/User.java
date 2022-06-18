@@ -34,7 +34,7 @@ public class User extends BaseEntity {
 
     private int userMileagePoint;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonManagedReference
     private List<Review> reviewList = new ArrayList<>();
 

@@ -7,12 +7,36 @@ Content-Type: application/json
   "action": "ADD",
   "reviewId": "review_58-dc5f-4878-9381-ebb7b26677721",
   "content": "좋아요!",
-  "attachedPhotoIds": ["photo_4e-a531-46de-88d0-ff0ed70c0bb821", "photo_e2-851d-4a50-bb07-9cc15cbdc3321"],
+  "attachedPhotoIds": [],
     "userId": "user_e0ef2-92b7-4817-a5f3-0c575361f7451",
     "placeId": "place_f1c-5acb-4efb-a1af-eddada31b00f1"
     }
 
 
 ### Review 수정
+POST http://localhost:8080/api/v1/review/events
+Content-Type: application/json
+
+{
+  "type": "REVIEW",
+  "action": "MOD",
+  "reviewId": "review_58-dc5f-4878-9381-ebb7b26677721",
+  "content": "너무 좋아요!",
+  "attachedPhotoIds": ["photo_4e-a531-46de-88d0-ff0ed70c0bb821", "photo_e2-851d-4a50-bb07-9cc15cbdc3321"],
+  "userId": "user_e0ef2-92b7-4817-a5f3-0c575361f7451",
+  "placeId": "place_f1c-5acb-4efb-a1af-eddada31b00f1"
+}
 
 ### Review 삭제
+POST http://localhost:8080/api/v1/review/events
+Content-Type: application/json
+
+{
+  "type": "REVIEW",
+  "action": "DELETE",
+  "reviewId": "review_58-dc5f-4878-9381-ebb7b26677721",
+  "content": "너무 좋아요!",
+  "attachedPhotoIds": [],
+  "userId": "user_e0ef2-92b7-4817-a5f3-0c575361f7451",
+  "placeId": "place_f1c-5acb-4efb-a1af-eddada31b00f1"
+}

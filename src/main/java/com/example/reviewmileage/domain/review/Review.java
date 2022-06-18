@@ -75,6 +75,10 @@ public class Review extends BaseEntity {
         }
     }
 
+    public void deleteUser() {
+        this.user = null;
+    }
+
     public void updateReview(ReviewCommand.ReviewModCommand reviewUpdateCommand) {
         this.content = reviewUpdateCommand.getContent();
         this.photoList = reviewUpdateCommand.getPhotoList();

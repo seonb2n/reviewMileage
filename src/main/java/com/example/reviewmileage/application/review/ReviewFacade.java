@@ -8,6 +8,7 @@ import com.example.reviewmileage.domain.review.photos.PhotoService;
 import com.example.reviewmileage.domain.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,13 +35,11 @@ public class ReviewFacade {
     }
 
     public void deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand) {
-        //리뷰가 삭제된다.
-        //user 의 마일리지를 다시 계산한다
-        //user 의 마일리지 변경에 따른 m_history 가 update 된다.
         var review = reviewService.findReviewWithReviewToken(reviewDeleteCommand.getReviewToken());
         var userToken = review.getUser().getUserToken();
         reviewService.deleteReview(reviewDeleteCommand);
         var user = userFacade.findUserWithUserToken(userToken);
+        user.deleteReview(review);
         userFacade.updateUser(user);
     }
 }
