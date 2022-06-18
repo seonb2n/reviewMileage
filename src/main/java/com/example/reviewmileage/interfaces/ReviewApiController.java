@@ -1,9 +1,7 @@
 package com.example.reviewmileage.interfaces;
 
-import com.example.reviewmileage.application.place.PlaceFacade;
 import com.example.reviewmileage.application.review.ReviewFacade;
-import com.example.reviewmileage.application.user.UserFacade;
-import com.example.reviewmileage.common.response.response.CommonResponse;
+import com.example.reviewmileage.common.response.CommonResponse;
 import com.example.reviewmileage.interfaces.dto.EventDto;
 import com.example.reviewmileage.interfaces.dto.EventDtoMapper;
 import lombok.RequiredArgsConstructor;

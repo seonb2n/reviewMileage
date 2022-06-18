@@ -40,7 +40,8 @@ public class Place extends BaseEntity {
         placeToken = TokenGenerator.randomCharacterWithPrefix(PREFIX_PLACE);
     }
 
-    private void addReview(Review review) {
-        this.reviewList.add(review);
+    public String updatePlaceToken(String newPlaceToken) {
+        this.placeName = newPlaceToken;
+        return newPlaceToken;
     }
 }

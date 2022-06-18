@@ -1,4 +1,4 @@
-package com.example.reviewmileage.common.response.response;
+package com.example.reviewmileage.common.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

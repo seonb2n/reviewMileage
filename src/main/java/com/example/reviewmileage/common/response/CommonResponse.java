@@ -1,4 +1,4 @@
-package com.example.reviewmileage.common.response.response;
+package com.example.reviewmileage.common.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -60,4 +60,9 @@ public class User extends BaseEntity {
         this.userMileagePoint = recentMileage;
         return userMileagePoint;
     }
+
+    public String updateUserToken(String newUserToken) {
+        this.userToken = newUserToken;
+        return newUserToken;
+    }
 }
