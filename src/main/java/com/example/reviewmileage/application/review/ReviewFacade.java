@@ -6,6 +6,7 @@ import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.ReviewInfo;
 import com.example.reviewmileage.domain.review.photos.PhotoService;
 import com.example.reviewmileage.domain.review.service.ReviewService;
+import com.example.reviewmileage.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,12 +35,13 @@ public class ReviewFacade {
         return review;
     }
 
-    public void deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand) {
+    public User deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand) {
         var review = reviewService.findReviewWithReviewToken(reviewDeleteCommand.getReviewToken());
         var userToken = review.getUser().getUserToken();
         reviewService.deleteReview(reviewDeleteCommand);
         var user = userFacade.findUserWithUserToken(userToken);
         user.deleteReview(review);
         userFacade.updateUser(user);
+        return user;
     }
 }

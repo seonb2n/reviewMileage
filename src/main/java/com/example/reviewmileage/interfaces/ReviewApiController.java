@@ -38,19 +38,22 @@ public class ReviewApiController {
     public CommonResponse registerEvent(EventDto.EventRequest eventRequest) {
         var command = eventDtoMapper.toReviewRegisterCommand(eventRequest);
         var review = reviewFacade.registerReview(command);
-        return CommonResponse.success(review);
+        var response = eventDtoMapper.toEventResponse(review.getUser());
+        return CommonResponse.success(response);
     }
 
     public CommonResponse modEvent(EventDto.EventRequest eventRequest) {
         var command = eventDtoMapper.toReviewModCommand(eventRequest);
         var review = reviewFacade.modReview(command);
-        return CommonResponse.success(review);
+        var response = eventDtoMapper.toEventResponse(review.getUser());
+        return CommonResponse.success(response);
     }
 
     public CommonResponse deleteEvent(EventDto.EventRequest eventRequest) {
         var command = eventDtoMapper.toReviewDeleteCommand(eventRequest);
-        reviewFacade.deleteReview(command);
-        return CommonResponse.success("삭제가 완료됐습니다.");
+        var user = reviewFacade.deleteReview(command);
+        var response = eventDtoMapper.toEventResponse(user);
+        return CommonResponse.success(response);
     }
 
 }

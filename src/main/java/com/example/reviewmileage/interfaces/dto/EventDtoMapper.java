@@ -4,6 +4,7 @@ import com.example.reviewmileage.application.place.PlaceFacade;
 import com.example.reviewmileage.application.user.UserFacade;
 import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.photos.PhotoService;
+import com.example.reviewmileage.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +43,10 @@ public class EventDtoMapper {
         return ReviewCommand.ReviewDeleteCommand.builder()
                 .reviewToken(eventRequest.getReviewId())
                 .build();
+    }
+
+    public EventDto.EventResponse toEventResponse(User user) {
+        return new EventDto.EventResponse(user);
     }
 
 }

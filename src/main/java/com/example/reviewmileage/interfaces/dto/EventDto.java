@@ -1,5 +1,9 @@
 package com.example.reviewmileage.interfaces.dto;
 
+import com.example.reviewmileage.domain.review.Review;
+import com.example.reviewmileage.domain.user.User;
+import com.example.reviewmileage.domain.user.UserInfo;
+import com.example.reviewmileage.domain.user.history.MileageHistory;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +31,14 @@ public class EventDto {
     @Setter
     @ToString
     public static class EventResponse {
+        int userMileagePoint;
+        String userToken;
+        List<Review> reviewList;
 
-        public EventResponse() {
-
+        public EventResponse(User user) {
+            this.userMileagePoint = user.getUserMileagePoint();
+            this.userToken = user.getUserToken();
+            this.reviewList = user.getReviewList();
         }
     }
 
