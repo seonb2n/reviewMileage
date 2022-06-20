@@ -15,3 +15,4 @@ mySql db 를 localhost 의 3306 포트에 구동시키고, 사용자 아이디�
 + 마찮가지로, 사용자의 요청에 대해서는 Command 객체로 변환하여 사용한다.
 + 모든 응답 결과는 CommonResponse 로 wrapping 되고 내부 로직 오류나, 에러 발생 시에는 결과를 알려준다.
 + api 와 통신 간에는 dto 에 정의되어 있는 형태로 request 와 response 가 가능하다.
++ my sql databse 의 각각의 table 은 token 을 기준으로 indexing 처리가 되어 있다. 따라서 token 기반으로 entity 조회시 성능상 이점이 있다.
