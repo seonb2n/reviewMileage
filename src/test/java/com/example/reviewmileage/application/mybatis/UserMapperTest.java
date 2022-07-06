@@ -29,4 +29,5 @@ public class UserMapperTest {
             System.out.println(user.toString());
         }
     }
+
 }
