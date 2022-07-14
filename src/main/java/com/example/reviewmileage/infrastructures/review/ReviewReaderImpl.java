@@ -14,6 +14,7 @@ public class ReviewReaderImpl implements ReviewReader {
 
     @Override
     public Review getReviewWithReviewToken(String reviewToken) {
-        return reviewRepository.findReviewByReviewToken(reviewToken).orElseThrow(TokenNotFoundException::new);
+        var review =  reviewRepository.findReviewByReviewToken(reviewToken).orElseThrow(TokenNotFoundException::new);
+        return  review;
     }
 }

@@ -22,11 +22,13 @@ public class ReviewApiController {
     public CommonResponse handleEvents(@RequestBody EventDto.EventRequest eventRequest) {
         CommonResponse result = null;
         switch (eventRequest.getAction()) {
-            case ("ADD") : result = registerEvent(eventRequest);
+            case ("ADD") : result = createEvent(eventRequest);
             break;
             case ("MOD") : result = modEvent(eventRequest);
             break;
             case ("DELETE") : result = deleteEvent(eventRequest);
+            break;
+            case ("READ") : result = readEvent(eventRequest);
             break;
         }
         if(result == null) {
@@ -35,7 +37,13 @@ public class ReviewApiController {
         return result;
     }
 
-    public CommonResponse registerEvent(EventDto.EventRequest eventRequest) {
+    public CommonResponse readEvent(EventDto.EventRequest eventRequest) {
+        var command = eventDtoMapper.toReadCommand(eventRequest);
+        var review = reviewFacade.readReview(command);
+        return CommonResponse.success(review);
+    }
+
+    public CommonResponse createEvent(EventDto.EventRequest eventRequest) {
         var command = eventDtoMapper.toReviewRegisterCommand(eventRequest);
         var review = reviewFacade.registerReview(command);
         var response = eventDtoMapper.toEventResponse(review.getUser());

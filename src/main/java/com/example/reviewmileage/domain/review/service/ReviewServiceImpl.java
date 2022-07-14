@@ -4,6 +4,7 @@ import com.example.reviewmileage.domain.review.Review;
 import com.example.reviewmileage.domain.review.ReviewCommand;
 import com.example.reviewmileage.domain.review.ReviewInfo;
 import com.example.reviewmileage.domain.review.photos.PhotoService;
+import com.example.reviewmileage.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,7 +18,7 @@ public class ReviewServiceImpl implements ReviewService{
 
     private final ReviewReader reviewReader;
     private final ReviewStore reviewStore;
-    private final PhotoService photoService;
+    private final UserService userService;
 
     @Override
     @CacheEvict(value = "reviewCache", key = "#reviewRegisterCommand.reviewToken")
@@ -46,5 +47,11 @@ public class ReviewServiceImpl implements ReviewService{
     @Cacheable(value = "reviewCache", key = "#reviewToken")
     public Review findReviewWithReviewToken(String reviewToken) {
         return reviewReader.getReviewWithReviewToken(reviewToken);
+    }
+
+    @Override
+    @Cacheable(value = "reviewCache", key = "#command.reviewToken")
+    public Review readReview(ReviewCommand.ReviewReadCommand command) {
+        return reviewReader.getReviewWithReviewToken(command.getReviewToken());
     }
 }

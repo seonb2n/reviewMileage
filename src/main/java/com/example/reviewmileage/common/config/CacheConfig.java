@@ -1,6 +1,7 @@
 package com.example.reviewmileage.common.config;
 
 
+import com.example.reviewmileage.domain.review.Review;
 import com.example.reviewmileage.domain.review.ReviewInfo;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -22,13 +23,13 @@ public class CacheConfig {
     public CacheManager ehcacheManager() {
         CachingProvider provider = Caching.getCachingProvider();
         CacheManager cacheManager = provider.getCacheManager();
-        MutableConfiguration<String, ReviewInfo.Main> configuration =
-                new MutableConfiguration<String, ReviewInfo.Main>()
-                        .setTypes(String.class, ReviewInfo.Main.class)
+        MutableConfiguration<String, Review> configuration =
+                new MutableConfiguration<String, Review>()
+                        .setTypes(String.class, Review.class)
                         .setStoreByValue(false)
                         .setExpiryPolicyFactory(CreatedExpiryPolicy.factoryOf(Duration.ONE_MINUTE));
 
-        Cache<String, ReviewInfo.Main> cache = cacheManager.createCache("reviewCache", configuration);
+        Cache<String, Review> cache = cacheManager.createCache("reviewCache", configuration);
         return cacheManager;
     }
 }

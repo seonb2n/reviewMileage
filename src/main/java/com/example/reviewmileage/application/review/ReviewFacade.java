@@ -8,6 +8,7 @@ import com.example.reviewmileage.domain.review.photos.PhotoService;
 import com.example.reviewmileage.domain.review.service.ReviewService;
 import com.example.reviewmileage.domain.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,8 @@ public class ReviewFacade {
     public ReviewInfo.Main registerReview(ReviewCommand.ReviewRegisterCommand reviewRegisterCommand) {
         var reviewInfo = reviewService.addReview(reviewRegisterCommand);
         var user = reviewRegisterCommand.getUser();
-        user.addReview(reviewService.findReviewWithReviewToken(reviewInfo.getReviewToken()));
+        var review  = reviewService.findReviewWithReviewToken(reviewInfo.getReviewToken());
+        user.addReview(review);
         userFacade.updateUser(user);
         return reviewInfo;
     }
@@ -43,5 +45,9 @@ public class ReviewFacade {
         user.deleteReview(review);
         userFacade.updateUser(user);
         return user;
+    }
+
+    public ReviewInfo.Main readReview(ReviewCommand.ReviewReadCommand command) {
+        return new ReviewInfo.Main(reviewService.readReview(command));
     }
 }
