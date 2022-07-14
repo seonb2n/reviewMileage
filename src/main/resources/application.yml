@@ -1,5 +1,3 @@
-mybatis:
-  mapper-locations: mapper/*.xml
 
 spring:
   datasource:
