@@ -13,4 +13,6 @@ public interface ReviewService {
     void deleteReview(ReviewCommand.ReviewDeleteCommand reviewDeleteCommand);
 
     Review findReviewWithReviewToken(String reviewToken);
+
+    Review readReview(ReviewCommand.ReviewReadCommand command);
 }

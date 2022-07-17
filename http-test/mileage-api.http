@@ -12,6 +12,19 @@ Content-Type: application/json
     "placeId": "place_f1c-5acb-4efb-a1af-eddada31b00f1"
     }
 
+### Review 조회
+POST http://localhost:8080/api/v1/review/events
+Content-Type: application/json
+
+{
+  "type": "REVIEW",
+  "action": "READ",
+  "reviewId": "review_58-dc5f-4878-9381-ebb7b26677721",
+  "content": "너무 좋아요!",
+  "attachedPhotoIds": [],
+  "userId": "user_e0ef2-92b7-4817-a5f3-0c575361f7451",
+  "placeId": "place_f1c-5acb-4efb-a1af-eddada31b00f1"
+}
 
 ### Review 수정
 POST http://localhost:8080/api/v1/review/events

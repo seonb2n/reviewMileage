@@ -45,6 +45,12 @@ public class EventDtoMapper {
                 .build();
     }
 
+    public ReviewCommand.ReviewReadCommand toReadCommand(EventDto.EventRequest eventRequest) {
+        return ReviewCommand.ReviewReadCommand.builder()
+                .reviewToken(eventRequest.getReviewId())
+                .build();
+    }
+
     public EventDto.EventResponse toEventResponse(User user) {
         return new EventDto.EventResponse(user);
     }

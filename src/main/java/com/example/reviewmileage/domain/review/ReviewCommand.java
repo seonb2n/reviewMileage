@@ -35,6 +35,13 @@ public class ReviewCommand {
     @Getter
     @Builder
     @ToString
+    public static class ReviewReadCommand {
+        private String reviewToken;
+    }
+
+    @Getter
+    @Builder
+    @ToString
     public static class ReviewModCommand {
         private String reviewToken;
         private String content;
