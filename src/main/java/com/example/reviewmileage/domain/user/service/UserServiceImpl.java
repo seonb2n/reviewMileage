@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService{
         User savedUser = userStore.store(user);
         return new UserInfo.Main(savedUser);
     }
+
+    @Override
+    public void deleteUser(String userToken) {
+
+    }
 }

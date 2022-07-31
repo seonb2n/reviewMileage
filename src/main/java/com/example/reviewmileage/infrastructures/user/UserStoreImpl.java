@@ -20,4 +20,9 @@ public class UserStoreImpl implements UserStore {
     public User registerUser(User initUser) {
         return userRepository.save(initUser);
     }
+
+    @Override
+    public void deleteUser(String userToken) {
+        userRepository.deleteUserByUserToken(userToken);
+    }
 }

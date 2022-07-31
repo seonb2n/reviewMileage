@@ -14,4 +14,6 @@ public interface UserService {
     User findUserWithUserToken(String userToken);
 
     UserInfo.Main updateUser(User user);
+
+    void deleteUser(String userToken);
 }

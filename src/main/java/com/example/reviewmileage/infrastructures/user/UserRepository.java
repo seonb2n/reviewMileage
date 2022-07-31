@@ -12,4 +12,5 @@ public interface UserRepository extends JpaRepository <User, Long>{
     @Query("select u from User u left join fetch u.reviewList where u.userToken= :userToken")
     Optional<User> findUserByUserToken(String userToken);
 
+    void deleteUserByUserToken(String userToken);
 }
