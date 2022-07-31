@@ -8,25 +8,30 @@ import com.example.reviewmileage.infrastructures.user.UserStoreImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
+@AutoConfigureMockMvc
 class UserServiceImplTest {
 
     private UserServiceImpl userService;
 
-    @MockBean(name = "userStore")
+    @Mock
     private UserStoreImpl userStore;
 
-    @MockBean(name = "userReader")
+    @Mock
     private UserReaderImpl userReader;
 
     private User mockUserEntity;
@@ -47,11 +52,17 @@ class UserServiceImplTest {
                         .build();
 
         //given
-        given(userStore.registerUser(any())).willReturn(mockUserEntity);
+        given(userStore.registerUser(any())).willAnswer(invocation -> {
+            var user = (User) invocation.getArgument(0);
+
+            assertEquals("mock-user", user.getUserName());
+
+            return mockUserEntity;
+                }
+        );
 
         //when
         var registeredUser = userService.registerUser(userCommand);
-
 
         //then
         assertEquals("mock-user", registeredUser.getUserName());
@@ -60,5 +71,19 @@ class UserServiceImplTest {
 
     @Test
     void deleteUser() {
+        //init
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+
+        //given
+
+        //when
+        userService.deleteUser(mockUserEntity.getUserToken());
+
+        //then
+        verify(userStore, atLeastOnce()).deleteUser(any());
+        verify(userStore).deleteUser(argumentCaptor.capture());
+
+        String token = argumentCaptor.getValue();
+        assertEquals(token, mockUserEntity.getUserToken());
     }
 }
