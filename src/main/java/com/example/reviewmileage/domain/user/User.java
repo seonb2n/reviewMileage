@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,11 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name="user", indexes = {@Index(name = "user_token_index", columnList = "user_token")})
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
 
     private static final String PREFIX_USER = "user_";
+
+    private static final long serialVersionUID = 1123234L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
